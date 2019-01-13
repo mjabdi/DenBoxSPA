@@ -1,0 +1,117 @@
+
+
+<div mat-dialog-title class="product-title">
+        
+    <i (click)="closeDialog()" matTooltip="close" class="fa fa-close icon-close"></i> 
+    
+    <span [innerHtml]="detailInfo.products[0].name"> </span>
+
+</div>    
+
+<mat-dialog-content *ngIf="!detailInfo.mobile" class="product-content">
+
+    <div class="my-card-image-container">
+            <img class="my-card-image" [src]="detailInfo.products[0].imageUrl">
+    </div>
+
+    <div class="my-card-content">
+
+            <div class="text-title">
+                Product Category
+            </div>
+
+            <div class="my-card-category">
+                       <span style="font-weight:400" [innerHtml]="detailInfo.products[0].category"></span> <mat-icon style="vertical-align:bottom;color:#999;"> arrow_right </mat-icon> <span [innerHtml]="detailInfo.products[0].subCategory"></span>
+            </div>
+
+            <div class="text-title">
+                    Product Description
+            </div>
+
+            <p class="product-desc" [innerHTML]="detailInfo.products[0].description">
+            </p>
+    </div>
+
+    <div class="suppliers">
+
+
+        <div *ngFor="let product of detailInfo.products;let index = index">
+            <div class="supplier-item">
+
+                <div class="supplier-name">
+                      <img [src]="getSupImage(product.supplier)" [class]="getSupImageClass(product.supplier)">  
+                      <span [innerHtml]="product.supplier"> </span>  
+                </div>
+
+                <div class="supplier-buy">
+                        <span class="price"> {{product.price | number:'1.0-2'}} £ </span> 
+
+
+                        <a class="btn-view" [href]="product.pageUrl" target="_blank">
+                            <button mat-raised-button>Visit on Seller Website<mat-icon class="icon-btn-forward">chevron_right</mat-icon></button>
+                        </a>
+                </div>
+
+            </div>
+
+            <mat-divider *ngIf="index < detailInfo.products.length - 1"> </mat-divider>
+
+        </div>
+
+    </div>
+
+
+</mat-dialog-content>
+
+
+<mat-dialog-content *ngIf="detailInfo.mobile" class="product-content-mobile">
+
+        <div class="suppliers-mobile">
+
+                <div *ngFor="let product of detailInfo.products;let index = index">
+                    <div class="supplier-item-mobile">
+        
+                        <div class="supplier-name-mobile">
+                              <img [src]="getSupImage(product.supplier)" [class]="getSupImageClassMobile(product.supplier)">  
+                              <span [innerHtml]="product.supplier"> </span>  
+                        </div>
+        
+                        <div class="supplier-buy-mobile">
+                               <span class="price"> {{product.price | number:'1.0-2'}} £ </span> 
+                        </div>
+
+                        <div class="btn-view-mobile" >
+                                <a [href]="product.pageUrl" target="_blank">
+                                        <button mat-raised-button>Visit on Seller Website<mat-icon class="icon-btn-forward">chevron_right</mat-icon></button>
+                                 </a>
+                        </div>
+        
+                    </div>
+        
+                    <mat-divider *ngIf="index < detailInfo.products.length - 1"> </mat-divider>
+        
+                </div>
+        
+            </div>
+
+            <mat-divider></mat-divider> 
+
+        <div class="my-card-image-container-mobile">
+                <img class="my-card-image-mobile" [src]="detailInfo.products[0].imageUrl">
+        </div>
+
+        <div class="my-card-category-mobile">
+                <span style="font-weight:400" [innerHtml]="detailInfo.products[0].category"></span> <mat-icon style="vertical-align:bottom;color:#999;"> arrow_right </mat-icon> <span [innerHtml]="detailInfo.products[0].subCategory"></span>
+        </div>
+
+        <p class="product-desc-mobile" [innerHTML]="detailInfo.products[0].description">
+        </p>
+
+
+        
+
+
+
+ </mat-dialog-content>
+
+

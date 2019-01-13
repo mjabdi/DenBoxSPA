@@ -1,0 +1,138 @@
+
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+// $my-primary-color : #44aa8a;
+// $my-primary-color-light : #78dcba;
+// $my-primary-color-dark : #007a5d;
+
+// $my-secondary-color :  #ab4465;
+// $my-secondary-color-light : #e07393;
+// $my-secondary-color-dark : #78103b;
+
+
+// $my-primary-color : #009688;
+// $my-primary-color-light : #009688;
+// $my-primary-color-dark : #00796B;
+
+$mat-pink : #ff4081;
+
+$my-primary-color : #248eaa;
+$my-primary-color-light : #2ca4cb;
+$my-primary-color-dark : #1d728a;
+
+$my-secondary-color :  #607D8B;
+$my-secondary-color-light :	#809aa7;
+$my-secondary-color-dark : #455A64;
+
+// $my-secondary-color :  #C2185B;
+// $my-secondary-color-light :	#E91E63;
+// $my-secondary-color-dark : 	#7c0e3b;
+
+
+
+
+
+$text-white : #fff;
+
+
+.mat-fab, .mat-raised-button
+{
+    //background-image: linear-gradient(-30deg , $my-secondary-color-light 2%, $my-secondary-color  98%)!important; 
+    background-color: $my-secondary-color !important; 
+    color : $text-white !important;
+    transition: all 0.2s ease-out !important;
+}
+
+.mat-mini-fab 
+{
+    background-color: $my-primary-color-light  !important; 
+    color : $text-white !important;
+    transition: all 0.2s ease-out !important;
+}
+
+.mat-mini-fab:hover
+{
+    background-color: $my-primary-color-light !important; 
+    color : $text-white !important;
+    transition: all 0.2s ease-out !important;
+}
+
+.fab.mat-accent
+{
+    background-color: $my-primary-color-light !important; 
+    color : $text-white !important;
+    transition: all 0.2s ease-out !important;
+}
+
+.fab.mat-accent:hover
+{
+    background-color: $my-primary-color-light !important; 
+    color : $text-white !important;
+    transition: all 0.2s ease-out !important;
+}
+
+// .mat-raised-button
+// {
+//     border-radius: 8px;
+// }
+
+
+
+.mat-fab:hover , .mat-raised-button:hover
+{
+    //  background-image: linear-gradient(-30deg , #ab4465 2%, #e07393  98%)!important;  
+    // background: $text-white !important;
+    // color : $my-secondary-color-light !important;
+    // border : 1px solid  $my-secondary-color-light !important;
+    background-color: $my-secondary-color-light; 
+    transition: all 0.2s ease-out !important;
+}
+
+.bg-primary-color
+{
+    background: $my-primary-color !important;
+    color : #fff !important;
+}
+
+.bg-primary-color-dark
+{
+    background: $my-primary-color-dark !important;
+    color : #fff !important;
+}
+
+.bg-primary-color-light
+{
+    background: $my-primary-color-light !important;
+    color : #fff !important;
+}
+
+.mat-tooltip
+{
+    color : #fff !important;
+    font-size: 12px !important;
+    font-weight: 500 !important; 
+    background: rgba(0,0,0,0.7) !important;
+    padding: 5px !important;
+    min-width: 50px !important;
+
+}
+
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background: $my-primary-color-light !important;
+}
+
+.mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label, .mat-accent .mat-slider-track-fill {
+    background: $my-primary-color-light !important;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick
+{
+    color : $my-primary-color;
+}
+
+
+// .custom-modalbox
+// {
+//     background: #fafafa;
+// }

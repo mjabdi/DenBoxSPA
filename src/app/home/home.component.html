@@ -1,0 +1,603 @@
+<div *ngIf="getUserName() == null || getUserName().trim().length == 0">
+ 
+        <div class="center-screen">
+
+                <div [class]="OnMobile() ? 'login-box-mobile' : 'login-box'">
+
+                        <div class="login-header">
+                                DenBox
+                        </div>
+                        <div class="login-body">
+                                <div class="text-password"> Enter your password to procced </div> 
+                                <div class="input-password">
+                                        <!-- <input matInput placeholder="please enter your password" type="password" #password  class="input-password">  -->
+                                        <mat-form-field appearance="outline">
+                                                        <mat-label>Enter your password</mat-label>
+                                                        <input #password style="font-size:16px" type="password" (keyup)="CheckEnter($event,password.value)" matInput placeholder="">
+                                                        <mat-icon matSuffix>lock</mat-icon>
+                                                        <!-- <mat-hint>Hint</mat-hint> -->
+                                        </mat-form-field>
+                                </div>
+
+                                <div *ngIf="passwordWrong" class="incorrect-password"> Your password is wrong! </div>
+
+                                <button style="width: 100px" mat-raised-button (click)="EnterSite(password.value)">Enter</button>                              
+                        </div>
+                </div>
+        </div>
+
+</div>
+
+<div *ngIf="getUserName() != null && getUserName().trim().length > 0">
+        <!-- <div> -->
+
+
+<div *ngIf="totalProducts == null || totalProducts.length <= 1">
+        <div class="center-screen">
+                <div>
+                        <img src="../../assets/img/logo4-old.png" style="width:259px;height:297px">
+                </div>
+                <div class="text-loading">Loading...</div>
+                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                <!-- <div style="text-align: center">Loading</div> -->
+        </div>
+</div>
+
+
+<div *ngIf="totalProducts != null && totalProducts.length > 1">
+
+<div style="background: #fff; padding: 0px;margin: 0px;width: 100%;height: 60px;">
+
+         <div style="float:left">
+                <div class="header-social">
+                        <a style="margin-left:15px" class="facebook social-icon" href="#" title="Facebook"><i class="fa fa-facebook"></i></a>
+                        <a class="twitter social-icon" href="#" title="Twitter"><i class="fa fa-twitter"></i></a>
+                        <a class="instagram social-icon" href="#" title="Instagram"><i class="fa fa-instagram"></i></a>
+                        <a class="envelope social-icon" href="#" title="Email"><i class="fa fa-envelope"></i></a>		
+                </div>
+         </div>
+
+        <div style="float:right">
+                <div  style="margin-right: 0px; margin-top:12px;margin-bottom:0px">
+                                <span class="login-link"> Log in  </span>
+                        
+                                <div style="display: inline; margin-right:20px">
+                                                <button mat-raised-button> Sign up  </button>
+                                </div>     
+                </div> 
+        </div>
+ </div>
+
+ <div *ngIf="windowWidth > 780px" class="bg-primary-color" style="padding: 0;margin: 0; margin-bottom : 20px;width: 100%;min-height: 180px;position: relative;"
+ fxLayout
+ fxLayout.xs="column"
+ fxLayoutGap="0px"
+ fxLayoutGap.xs="0px"
+ fxLayoutAlign="space-around center"
+ >
+
+    <div style="position: absolute; left:23px;top:25px">
+        <img src="../../assets/img/logo.png" class="img-logo" style="width: 130px;height: 130px;">
+    </div>
+
+    <div fxFlex="50%">
+        <p class="text-big1" > DenBox Product Finder</p>
+        <p class="text-big2">What are you looking for?</p>
+        <div style="background: #fff; border-radius: 4px;width: 100%;height:50px;"
+        fxLayout
+        fxLayoutGap="0px"
+        fxLayout.xs="column"
+        fxLayoutAlign.xs="space-evenly stretch"
+        fxLayoutGap.xs="0px"
+        fxLayoutAlign="space-around center"
+        >
+                <div fxFlex="93%">
+                      <input #searchinput (keyup)="FindProducts2(searchinput.value)" autofocus placeholder="Search for products ...     "  type="text" style="padding-left: 20px; width:100% ;border : none ; color:rgb(83, 83, 83)">
+                </div>
+                <div fxFlex="7%" style="text-align: right;padding-right: 15px ">
+                        <mat-icon class="icon-search" style="font-size:32px ;margin-top:7px;">search</mat-icon>
+                </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div *ngIf="windowWidth <= 780px"  class="bg-primary-color" style="padding: 10px;margin: 0; margin-bottom : 20px;width: 100%;min-height: 130px;">
+
+        <div style="text-align: center;margin-bottom:15px">
+                <img src="../../assets/img/logo.png" class="img-logo" style="width: 90px;height: 90px;">
+        </div>
+
+        <div style="background: #fff; border-radius: 4px;width: 100%;height:50px"
+        fxLayout
+        fxLayoutGap="0px"
+        fxLayoutAlign="space-around center"
+        >
+                <div fxFlex="90%">
+                      <input #searchinput2 (keyup)="FindProducts2(searchinput2.value)" autofocus placeholder="Search for products ..."  type="text" style="padding-left: 20px; width:100% ;border : none ; color:rgb(83, 83, 83)">
+                </div>
+                <div fxFlex="10%" style="text-align: left">
+                        <mat-icon class="icon-search" style="font-size:32px ;margin-top:7px;">search</mat-icon>
+                </div>
+        </div>
+
+</div>
+
+<div *ngIf="searchMode">
+
+
+
+
+
+<!-- <div *ngIf="windowWidth > 780px" class="row bg-primary-color-dark" style="padding: 0;margin: 0;width: 100%;height: 50px; border-top:1px solid #eee"
+fxLayout = "row"
+fxLayoutGap="20px"
+fxLayoutAlign="center"
+>
+        <div  class="mynav-link">  Best Sellers  </div>
+
+        <div  class="mynav-link"> Featured Products  </div> 
+
+        <div  class="mynav-link"> Recommended Products </div>
+
+        <div  class="mynav-link selected"> Search Results  </div> 
+</div> -->
+
+<div class="my-content">
+        <div class="row">
+                <div [class]=" ShowSideBarMobile ? 'fixedSideNav-mobile' : windowOffset > ScrollOffset ?  'fixedSideNav col-md-3' : 'col-md-3' " *ngIf="windowWidth > 780 || ShowSideBarMobile">
+                        <div *ngIf="productsFound != null && productsFound.length > 0 && productsFound[0].name != 'No Records'" class="search-pane">
+                                <div class="icon-filter">
+
+                                        <i [class]="HasFilters() ? 'fa fa-filter filter-highlight' : 'fa fa-filter' "></i>
+                                        <span class="text-filter"> Filter by</span>
+                                        <span *ngIf="windowWidth <= 780" style="float:right;cursor: pointer;" (click)="ShowSideBarMobile = false"> <i class="fa fa-close"></i> </span>
+                                        <div class="filter-chips">
+                                                <div *ngIf="selectedCategories != null && selectedCategories.length > 0" class="filter-chip">
+                                                        <span> Category </span>
+                                                        <span class="close-chip" (click)="resetCategoryFilter()"> <i class="fa fa-close"></i> </span>
+                                                </div>
+                                                <div *ngIf="selectedSuppliers != null && selectedSuppliers.length > 0" class="filter-chip">
+                                                                <span> Supplier </span>
+                                                                <span class="close-chip" (click)="resetSupplierFilter()"> <i class="fa fa-close"></i> </span>
+                                                 </div>
+        
+                                                 <div *ngIf="PriceChanged()" class="filter-chip">
+                                                                <span> Price </span>
+                                                                <span class="close-chip" (click)="resetPriceFilter()"> <i class="fa fa-close"></i> </span>
+                                                 </div>
+                                        </div>
+                                </div>
+                             
+
+                                
+                                <div class="search-suppliers">
+                                                        <div class="text-suppliers">
+                                                                 CATEGORIES
+                                                        </div> 
+                 
+                                                        <div>
+                                                                <div>
+                                                                        <mat-checkbox  *ngFor="let cat of categories.slice(0,7)" class="supply-check" (change)="onCategoriesChange(cat,$event)" [checked]="catChecked(cat)" >
+                                                                                <span class="span-category" [innerHtml]="cat"></span>
+                                                                        </mat-checkbox>
+                                                                 </div>
+                                                                 <div *ngIf="showAllCats && categories != null && categories.length > 7">
+                                                                                <mat-checkbox  *ngFor="let cat of categories.slice(5)" class="supply-check" (change)="onCategoriesChange(cat,$event)" [checked]="catChecked(cat)">
+                                                                                        <span class="span-category" [innerHtml]="cat"></span>
+                                                                                </mat-checkbox>
+                                                                 </div>
+                                                                 <span *ngIf="categories != null && categories.length > 7" class="show-more" (click)="showAllCats=!showAllCats">
+                                                                         {{!showAllCats ? '+ Show More ...' : '- Show Less' }} 
+                                                                 </span>
+
+                                                        </div>
+                                        </div>
+        
+
+                                <!-- <div class="search-suppliers">
+
+                                       <div class="text-suppliers">
+                                                SUPPLIERS
+                                       </div> 
+
+                                       <div>
+                                                <mat-checkbox *ngFor="let sup of suppliers" class="supply-check" (change)="onSuppliersChange(sup,$event)" [checked]="supChecked(sup)">
+                                                    <span class="span-category" [innerHtml]="sup"></span>
+                                                </mat-checkbox>
+                                       </div>
+                                </div> -->
+
+                                <div class="search-price">
+                                        <div>
+                                                MAX PRICE : {{pricemaxslider.value}} £
+                                                <div>
+                                                        <mat-slider style="width:100%" #pricemaxslider [max]="5000"
+                                                        [min]="1" [value]="priceMax" (change)="PriceMaxChanged($event)"> </mat-slider> 
+                                                </div>
+                                        </div>       
+
+                                        <div style="margin-top:10px;margin-bottom:10px">
+                                                MIN PRICE : {{priceminslider.value}} £
+                                                <div>
+                                                        <mat-slider  style="width:100%" #priceminslider [max]="5000"
+                                                        [min]="1" [value]="priceMin" (change)="PriceMinChanged($event)"> </mat-slider> 
+                                                </div>
+                                         </div>
+                                </div>
+                        </div>
+
+                </div>
+
+                <div *ngIf="windowOffset > ScrollOffset" class="col-md-3">
+                </div> 
+
+                <div class="col-md-9 col-xs-12 col-sm-12">
+                                <!-- <div 
+                                style = "margin-right:50px;margin-left:0px;margin-top:30px"
+                                fxLayoutGap="30px"
+                                fxLayout="column"
+                                fxLayoutAlign="space-evenly stretch"
+                                > -->
+
+                                <div 
+                                    style = "margin-right:20px;margin-left:0px">
+                                
+                                        <div *ngIf="windowWidth <= 780px" style="text-align: center;min-height:50px;">
+                                             
+                                                <div  [class]="windowOffset > ScrollOffset ? 'fixedNav-mobile' : '' "  class="search-result-summary-mobile" >
+                                                        <div *ngIf="loading">
+                                                                searching for <strong> '{{this.searchToken}}' </strong> ...
+                                                        </div>
+
+                                                        <div style="position: relative" *ngIf="productsFound != null && productsFound.length > 0 && !loading">
+
+                                                                <div style="position:absolute;top:-10px;left:10px">
+                                                                        <button mat-mini-fab style="font-size:20px" (click)="fabFilterClick()">
+                                                                                <i class="fa fa-filter"></i>
+                                                                        </button>
+                                                                </div>
+
+                                                                <strong> {{productsFound.length}}  </strong> products found for   <strong> {{this.searchToken.toLowerCase()}}  </strong> 
+                                                                <div *ngIf="HasFilters() && this.myFilteredProducts != null" [class]="FilterCountChanged ? 'text-filtred-count-changed-mobile' : 'text-filtred-count-mobile' " >  Filtered products : <strong> {{this.myFilteredProducts.length}} </strong>  </div>
+                                                        </div>
+
+                                                        <div *ngIf="productsFound != null && productsFound.length == 0 && !loading && searchToken != null && searchToken.trim().length > 0">
+                                                                No products found for <strong> '{{this.searchToken.toLowerCase()}}' </strong>
+                                                        </div>
+                                                </div>
+
+                                                <div style="text-align: center;margin-top:15px;" *ngIf="myFilteredProducts != null && myFilteredProducts.length > PageSize">
+                                                                <pagination-controls 
+                                                                        class="my-pagination-mobile"
+                                                                        (pageChange)="page = $event"
+                                                                        directionLinks="true"
+                                                                        autoHide="true"
+                                                                        responsive="false"
+                                                                        previousLabel=""
+                                                                        nextLabel=""
+                                                                        >
+                                                                </pagination-controls>
+                                                </div>
+
+                                       </div>
+
+                                       <div style="min-height:50px" *ngIf="windowWidth > 780px">
+                                                
+                                                <div  [class]="windowOffset > ScrollOffset ? 'fixedNav' : '' "  class="search-result-summary" >
+
+                                                        <div *ngIf="loading">
+                                                                searching for <strong> '{{this.searchToken}}' </strong> ...
+                                                        </div>
+
+                                                        <div *ngIf="productsFound != null && productsFound.length > 0 && !loading">
+                                                                <strong> {{productsFound.length}}  </strong> products found for   <strong> {{this.searchToken.toLowerCase()}}  </strong> 
+                                                                <span *ngIf="HasFilters() && this.myFilteredProducts != null" [class]="FilterCountChanged ? 'text-filtred-count-changed' : 'text-filtred-count' " >  Filtered products : <strong> {{this.myFilteredProducts.length}} </strong>  </span>
+                                                        </div>
+
+                                                        <div *ngIf="productsFound != null && productsFound.length == 0 && !loading && searchToken != null && searchToken.trim().length > 0">
+                                                                No products found for <strong> '{{this.searchToken.toLowerCase()}}' </strong>
+                                                        </div>
+                                                </div>
+
+                                                <div style="text-align: right" *ngIf="myFilteredProducts != null && myFilteredProducts.length > PageSize">
+                                                        <div class="has-text-centered">
+                                                                <pagination-controls 
+                                                                        class="my-pagination"
+                                                                        (pageChange)="page = $event"
+                                                                        directionLinks="true"
+                                                                        autoHide="true"
+                                                                        responsive="true"
+                                                                        previousLabel="Previous"
+                                                                        nextLabel="Next"
+                                                                        screenReaderPaginationLabel="Pagination"
+                                                                        screenReaderPageLabel="page"
+                                                                        screenReaderCurrentLabel="You're on page"
+                                                                        >
+                                                                </pagination-controls>
+                                                        </div>
+                                                </div>
+                                       </div>
+
+
+
+                                         <div class="example-viewport"  *ngIf="windowWidth > 780px">
+
+                                                <!-- <cdk-virtual-scroll-viewport itemSize="20" class="example-viewport"> -->
+
+                                                 <!-- <virtual-scroller #scroll [items]="myFilteredProducts" [parentScroll]="scroll.window" class="example-viewport">         -->
+                                                        <div *ngFor="let product of myFilteredProducts | paginate: { itemsPerPage: PageSize, currentPage: page }" class="my-card">
+                                                                <div class="my-card-image-container">
+                                                                        <img class="my-card-image" [src]="product.imageUrl" (click)="ViewAllPrices(product)">
+                                                                </div>
+
+                                                                <div class="my-card-content">
+                                                                        <a (click)="ViewAllPrices(product)" class="product-title" title="View Details" [innerHTML]="highlight(product.name,this.searchToken)">
+
+                                                                        </a>
+                                                
+                                                                        <div class="my-card-category">
+                                                                                   <span style="font-weight:400" [innerHtml]="product.category"></span> <mat-icon style="vertical-align:bottom;color:#999;"> arrow_right </mat-icon> <span [innerHtml]="product.subCategory"></span>
+                                                                        </div>
+
+                                                                        <p class="product-desc" [innerHTML]="highlight(product.description,this.searchToken)">
+                                                                        </p>
+                                                                </div>
+                                                
+                                                                <div class="my-card-price">
+                                                                        from {{product.minPrice | number:'1.0-2'}} £ <span style="color:#999"> - </span> <span style="text-decoration: line-through;font-weight: 500" class="text-secondary"> {{product.maxPrice | number:'1.0-2'}}  £</span>
+                                                                </div>
+                                                
+                                                                <div class="my-card-actions">
+                                                                        <button mat-raised-button (click)="ViewAllPrices(product)">View All Prices<mat-icon class="icon-btn-forward">chevron_right</mat-icon></button>
+                                                                </div>     
+                                                        </div>
+
+                                                        <div style="text-align: right" *ngIf="myFilteredProducts != null && myFilteredProducts.length > PageSize">
+                                                                        <div class="has-text-centered">
+                                                                                <pagination-controls 
+                                                                                        class="my-pagination"
+                                                                                        (pageChange)="page = $event;ScrollToNav();"
+                                                                                        directionLinks="true"
+                                                                                        autoHide="true"
+                                                                                        responsive="true"
+                                                                                        previousLabel="Previous"
+                                                                                        nextLabel="Next"
+                                                                                        screenReaderPaginationLabel="Pagination"
+                                                                                        screenReaderPageLabel="page"
+                                                                                        screenReaderCurrentLabel="You're on page"
+                                                                                        >
+                                                                                </pagination-controls>
+                                                                        </div>
+                                                        </div>
+                
+                                                 <!-- </virtual-scroller>  -->
+                                          <!-- </cdk-virtual-scroll-viewport> -->
+                                       </div>  
+                                       
+                                       <div class="example-viewport-mobile" *ngIf="windowWidth <= 780px">
+
+                                                <!-- <cdk-virtual-scroll-viewport itemSize="15" class="example-viewport-mobile"> -->
+
+                                                 <div *ngFor="let product of myFilteredProducts | paginate: { itemsPerPage: PageSize, currentPage: page }" class="my-card-mobile">
+                                                        
+                                                        <div class="product-title-container-mobile">
+                                                                <a (click)="ViewAllPrices(product)" target="_blank" class="product-title-mobile" title="View Details" [innerHTML]="highlight(product.name,this.searchToken)">
+
+                                                                </a>
+                                                        </div>  
+
+                                                        <div class="my-card-category-mobile">
+                                                                        <span style="font-weight:400" [innerHtml]="product.category"></span> <mat-icon style="vertical-align:bottom;color:#999;"> arrow_right </mat-icon> <span [innerHtml]="product.subCategory"></span>
+                                                        </div>
+                                                        
+                                                        <div (click)="ViewAllPrices(product)"  class="my-card-image-container-mobile">
+                                                                <img class="my-card-image-mobile" [src]="product.imageUrl">
+                                                        </div>
+
+                                                        <p class="product-desc-mobile" [innerHTML]="highlight(product.description,this.searchToken)">
+                                                        </p>
+                                        
+                                                        <div class="my-card-price-mobile">
+                                                                from {{product.minPrice | number:'1.0-2'}} £ <span style="color:#999"> - </span> <span style="text-decoration: line-through;font-weight: 500" class="text-secondary"> {{product.maxPrice | number:'1.0-2'}}  £</span>
+                                                        </div>
+                                        
+                                                        <div class="my-card-actions-mobile">
+                                                                <button style="width:100%" mat-raised-button (click)="ViewAllPrices(product)"> View All Prices<mat-icon class="icon-btn-forward">chevron_right</mat-icon></button>
+                                                        </div>     
+                                                </div>
+
+                                                <div style="text-align: center;margin-top:10px;" *ngIf="myFilteredProducts != null && myFilteredProducts.length > PageSize">
+                                                        <pagination-controls 
+                                                                class="my-pagination-mobile"
+                                                                (pageChange)="page = $event;ScrollToNav();"
+                                                                directionLinks="true"
+                                                                autoHide="true"
+                                                                responsive="false"
+                                                                previousLabel=""
+                                                                nextLabel=""
+                                                                >
+                                                        </pagination-controls>
+                                                </div>
+                                        <!-- </cdk-virtual-scroll-viewport> -->
+                                       </div>  
+                       </div>
+                </div>
+        </div>
+</div>
+
+</div>
+
+
+
+<!------------------   End of Search Mode   ------>
+
+<div *ngIf="!searchMode" style = "margin-left : 10%; margin-right : 10% ;padding-top:30px">
+
+        <h3 class="title title_center"><span>New Products</span></h3>
+
+        <div    class="special-products-section"
+                fxLayout="row wrap"
+                fxLayout.xs="column"
+                fxLayoutGap="10px"
+                fxLayoutGap.xs="10px"
+                fxLayoutAlign="space-around center"
+                fxLayoutAlign.xs="strech center"
+        >
+
+                <div fxFlex="30%" *ngFor="let product of BestSellers" class="product-best-seller">
+                        <a [href]="product.pageUrl" target="_blank">
+                                <div class="special-product-card-title">
+                                        <span [innerHtml]="product.name"></span>         
+                                </div>
+                                <img class="special-product-card-image" [src]="product.imageUrl"/>
+                         </a>
+                </div>
+        </div>
+
+        <h3 class="title title_center"><span>Most Viewed</span></h3>
+
+        <div    class="special-products-section"
+                fxLayout="row wrap"
+                fxLayout.xs="column"
+                fxLayoutGap="10px"
+                fxLayoutGap.xs="10px"
+                fxLayoutAlign="space-around center"
+                fxLayoutAlign.xs="strech center"
+        >
+
+                <div fxFlex="30%" *ngFor="let product of NewProducts" class="product-best-seller">
+                        <a [href]="product.pageUrl" target="_blank">
+                                <div class="special-product-card-title">
+                                <span [innerHtml]="product.name"></span>         
+                                </div>
+                                <div>
+                                        <img class="special-product-card-image" [src]="product.imageUrl" />
+                                </div>
+                         </a>
+                </div>
+        </div>
+
+
+        <h3 class="title title_center"><span>Recommended</span></h3>
+
+        <div    class="special-products-section"
+                fxLayout="row wrap"
+                fxLayout.xs="column"
+                fxLayoutGap="20px"
+                fxLayoutGap.xs="20px"
+                fxLayoutAlign="space-around center"
+                fxLayoutAlign.xs="strech center"
+        >
+
+                <div fxFlex="30%" *ngFor="let product of RecommendedProducts" class="product-best-seller">
+
+                        <a [href]="product.pageUrl" target="_blank">
+                                <div class="special-product-card-title">
+                                        <span [innerHtml]="product.name"></span>         
+                                </div>
+                                <img class="special-product-card-image" [src]="product.imageUrl" />
+                        </a>
+                </div>
+        </div>
+
+
+
+
+</div>
+
+
+<div *ngIf="windowOffset > ScrollOffset" class="btn-scroll-to-top" (click)="ScrollToTop()">
+       <mat-icon matTooltip="Back To Top"> keyboard_arrow_up</mat-icon>
+</div>
+
+<!-------------- End of HomePage ----------------->
+
+<div *ngIf="!searchMode">
+
+        <div class="pre-footer">
+                <span style="cursor: pointer" (click)="ScrollToTop()"> Back To Top</span>
+        </div>
+
+        <div class="my-footer">
+                        
+               <div class="row">
+                       <div class="col-md-6 col-sm-12">
+
+                                <div class="footer-social">
+                                        <a class="facebook footer-icon" href="#" title="Facebook"><i class="fa fa-facebook"></i></a>
+                                        <a class="twitter footer-icon" href="#" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                        <a class="instagram footer-icon" href="#" title="Instagram"><i class="fa fa-instagram"></i></a>
+                                        <a style="margin-right:0" class="envelope footer-icon" href="#" title="Email"><i class="fa fa-envelope"></i></a>		
+                                </div>   
+                                
+                                <div    class="footer-copyright">
+                                        &copy; Copyright 2019 - DenBox 
+                                </div>
+
+                       </div>
+                       <div class="col-md-6 col-sm-12">
+                                <ul class="footer-nav">
+                                        <li><a href="#">Contact</a></li>
+                                        <li><a href="#">Terms of Condition</a></li>
+                                        <li><a href="#">Terms of Use</a></li>
+                                        <li><a href="#">Privacy Policy</a></li>
+                                </ul>
+                        </div>
+               </div>
+
+
+        </div>
+</div>
+
+<div *ngIf="searchMode">
+
+        <div class="row">
+
+                <div class="col-md-3">
+
+                </div>
+
+                <div style="padding:0" class="col-md-9">
+                        <div class="pre-footer">
+                                <span style="cursor: pointer" (click)="ScrollToTop()"> Back To Top</span>
+                        </div>
+                
+                        <div class="my-footer">
+                                <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                        
+                                                <div class="footer-social">
+                                                        <a class="facebook footer-icon" href="#" title="Facebook"><i class="fa fa-facebook"></i></a>
+                                                        <a class="twitter footer-icon" href="#" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                                        <a class="instagram footer-icon" href="#" title="Instagram"><i class="fa fa-instagram"></i></a>
+                                                        <a style="margin-right:0" class="envelope footer-icon" href="#" title="Email"><i class="fa fa-envelope"></i></a>		
+                                                </div>   
+                                                
+                                                <div    class="footer-copyright">
+                                                        &copy; Copyright 2019 - DenBox 
+                                                </div>
+                        
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                                <ul class="footer-nav">
+                                                        <li><a href="#">Contact</a></li>
+                                                        <li><a href="#">Terms of Condition</a></li>
+                                                        <li><a href="#">Terms of Use</a></li>
+                                                        <li><a href="#">Privacy Policy</a></li>
+                                                </ul>
+                                                </div>
+                                        </div>
+                        </div>
+                </div>
+        </div>
+
+ </div>
+
+</div>
+
+
+
+
+</div>

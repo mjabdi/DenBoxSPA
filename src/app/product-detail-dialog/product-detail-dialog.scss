@@ -1,0 +1,283 @@
+@import "../../styles.scss";
+
+.product-title
+{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color : $my-secondary-color;
+}
+
+.icon-close
+{
+    float: right;
+    // position: absolute;
+    // top : 10px;
+    // right: 10px;
+    font-size: 20px;
+    font-weight: 200;
+    cursor: pointer;
+    color : #999;
+    transition: all 0.2s ease-out;
+    margin-left : 20px;
+}
+
+.icon-close:hover
+{
+   color : #aaa;
+}
+
+.product-content
+{
+    position: relative;
+    // background: #fafafa;
+}
+
+.my-card-image-container
+{
+  float: left;
+  margin-top : 20px;
+  //margin-left : 10px;
+  margin-bottom : 20px;
+}
+
+
+.my-card-image
+{
+  width : 200px;
+  height: 200px;
+  //border : 1px solid #ddd;
+//   padding: 5px;
+//   box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+}
+
+
+.my-card-content
+{
+  // position: absolute;
+  // left : 180px;
+  // top : 20px;
+//   margin-top : 30px;
+  margin-left : 250px;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+.my-card-category
+{
+  color: #555;
+  font-size : 14px;
+  font-weight: 300;
+  padding-left : 5px;
+}
+
+.product-desc
+{
+  padding-left : 5px;  
+  font-weight: 400;
+  color : #555;
+  font-size: 14px;
+//   margin-top: 10px;
+  //margin-left : 10px;
+  text-align: justify;
+  margin-right : 20px;
+  min-height: 50px;
+}
+
+.text-title
+{
+    margin-top : 25px;
+    margin-bottom : 5px;
+    color: $my-secondary-color;
+    font-size : 14px;
+    font-weight: 700;
+}
+
+.suppliers
+{
+    border : 1px solid #ddd;
+    // background: #f5f5f5;
+    // box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2);
+    width: 100%;
+    min-height: 200px;
+    margin-top : 50px;
+    margin-right: 10px;
+}
+
+.suppliers-mobile
+{
+    border : 1px solid #ddd;
+    // background: #f5f5f5;
+    // box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2);
+    width: 100%;
+  //  min-height: 200px;
+    margin-top :  0px;
+    //margin-right: 10px;
+}
+
+
+.supplier-item
+{
+    position: relative;
+    padding : 20px;
+    min-height: 65px;
+}
+
+.supplier-item-mobile
+{
+    padding : 5px;
+}
+
+.supplier-name
+{
+    float: left;
+    font-size: 18px;
+    font-weight: 700;
+    color : $my-secondary-color;
+    margin-left : 50px;
+}
+
+.supplier-name-mobile
+{
+    width: 100%;
+    font-size: 18px;
+    font-weight: 700;
+    color : $my-secondary-color;
+    text-align: center;
+}
+
+.supplier-buy
+{
+    float: right;
+}
+
+.supplier-buy-mobile
+{
+    margin-top : 15px;
+    margin-bottom : 15px;
+    color : $my-secondary-color;
+    font-size : 14px;
+    font-weight: 400;
+    text-align: center;
+
+    // margin-left : 50%;
+    // transform: translateX(-50%);
+}
+
+.price
+{
+    font-size: 18px;
+    color : $my-primary-color; 
+    font-weight: 700;
+}
+
+.btn-view
+{
+    margin-left : 20px;
+}
+
+.btn-view-mobile
+{
+  //  margin-top : 10px;
+    margin-bottom: 10px;
+    width : 100%;
+    text-align: center;
+}
+
+.supplier-image-trycare
+{
+    position: absolute;
+    left : 5px;
+    top : 0;
+    width : 45px;
+    height: 50px;
+    margin : 5px;
+}
+
+.supplier-image-dentalsky
+{
+    position: absolute;
+    left : 2px;
+    top : 5px;
+    width : 52px;
+    height: 45px;
+    margin : 5px;
+}
+
+.supplier-image-swallowdental
+{
+    position: absolute;
+    left : 6px;
+    top : 8px;
+    width : 42px;
+    height: 42px;
+    margin : 5px;
+    border-radius: 50%;
+}
+
+
+.supplier-image-trycare-mobile
+{
+    width : 45px;
+    height: 50px;
+    margin-right : 5px;
+}
+
+.supplier-image-dentalsky-mobile
+{
+    width : 52px;
+    height: 45px;
+    margin-right : 5px;
+}
+
+.supplier-image-swallowdental-mobile
+{
+    width : 42px;
+    height: 42px;
+    margin-right : 5px;
+    border-radius: 50%;
+}
+
+
+.my-card-category-mobile
+{
+  color: #555;
+  text-align: center;
+  font-size : 13px;
+  font-weight: 300;
+  margin-top : 5px;
+}
+
+.product-content-mobile
+{
+
+}
+
+.my-card-image-container-mobile
+{
+  margin-top : 10px;
+  width: 100%;
+  margin-left : 50%;
+  transform: translateX(-50%);
+}
+
+
+.my-card-image-mobile
+{
+  width : 100%;
+  height: 200px;
+//   border : 1px solid #ddd;
+//   box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+}
+
+.product-desc-mobile
+{
+  font-weight: 300;
+  color : #555;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-left : 10px;
+  text-align: justify;
+  margin-right : 20px;
+  margin-bottom : 10px;
+}
