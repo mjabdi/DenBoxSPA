@@ -30,7 +30,7 @@ export class ProductService {
     private searchUrl = baseUrl + '/product/search/';
     private getAllUrl = baseUrl + '/product/';
 
-    private getAllUrl3 = "https://api.talktoleadsnow.com/api/js/denbox-products.json";
+    private getAllUrl3 = "https://api.talktoleadsnow.com/api/js/download.json";
     // private getAllUrlZip = baseUrl + '/product/';
 
     private searchUrl2 = 'https://denboxqueryfunction.azurewebsites.net/api/DenboxQueryFunction?code=Idek5RhnpWBJDSa6ydknmcoI7Csag8J0KMGkSNpQWsN6m2ztAiLqWg==';
@@ -66,7 +66,7 @@ export class ProductService {
 
 
     getAll3() : Observable<Product[]> {
-        return this.http.get<Product[]>(this.getAllUrl);
+        return this.http.get<Product[]>(this.getAllUrl3);
     }
     // getAllZip() : Observable<Product[]> {
     //     return this.http.get<any>(this.getAllUrlZip).pipe(map ((data : any) => { 

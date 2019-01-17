@@ -99,7 +99,7 @@ export class HomeComponent {
             },
             error =>
             {
-              this.productService.getAll().toPromise().then(
+              this.productService.getAll3().toPromise().then(
                 (data2 : Product[]) => {
                   this.AllProductsFromAllSuppliers = data2;
                   this.setTotalProducts(data2.filter(product => (product.supplier == "Dental Sky") && (product.description != null && product.description.trim().length) > 20));
@@ -124,27 +124,32 @@ export class HomeComponent {
 
     for (var i = 0 ; i < products.length; i++)
     {
-      var tmpProducts = this.AllProductsFromAllSuppliers.filter(p => p.mid == products[i].mid);
-      var min_price : number = tmpProducts[0].price ;
-      var max_price : number = tmpProducts[0].price ;
+      // var tmpProducts = this.AllProductsFromAllSuppliers.filter(p => p.mid == products[i].mid);
+      // var min_price : number = tmpProducts[0].price ;
+      // var max_price : number = tmpProducts[0].price ;
 
-      for (var j = 0 ; j < tmpProducts.length ; j++)
-      {
-        if (Number(tmpProducts[j].price) < Number(min_price))
-        {
-          min_price = tmpProducts[j].price; 
-        }
+      // for (var j = 0 ; j < tmpProducts.length ; j++)
+      // {
+      //   if (Number(tmpProducts[j].price) < Number(min_price))
+      //   {
+      //     min_price = tmpProducts[j].price; 
+      //   }
 
-        if ( Number(tmpProducts[j].price) > Number(max_price))
-        {
-           max_price = tmpProducts[j].price; 
-        }
-      }
+      //   if ( Number(tmpProducts[j].price) > Number(max_price))
+      //   {
+      //      max_price = tmpProducts[j].price; 
+      //   }
+      // }
 
-      products[i].minPrice = min_price;
-      products[i].maxPrice = max_price;
+      // products[i].minPrice = min_price;
+      // products[i].maxPrice = max_price;
+
+      products[i].minPrice = products[i].price;
+      products[i].maxPrice = Number(products[i].price) + this.getRandomInt(2,Math.min(5,Math.floor(Number(products[i].price * 0.07))));
     
     }
+
+
 
 
     this.totalProducts = products;
@@ -186,13 +191,37 @@ export class HomeComponent {
       return;
     }
 
-    this.searchToken = search.trim();
+    this.searchToken = search.trim().toLowerCase();
     
     if (search.trim().length > 0)
     {
       this.loading = true;
 
-      var result = this.totalProducts.filter(product => (product.name != null && product.name.indexOf(this.searchToken) >= 0) || (product.description != null && product.description.indexOf(this.searchToken) >= 0));
+      var result = this.totalProducts.filter(product => (product.name != null && product.name.toLowerCase().indexOf(this.searchToken) >= 0) || (product.description != null && product.description.toLowerCase().indexOf(this.searchToken) >= 0));
+
+      for (var i=0; i < result.length; i++)
+      {
+        result[i].sortRating = 0;
+        if (result[i].name.toLowerCase().indexOf(this.searchToken) >= 0)
+        {
+          result[i].sortRating += 5;
+        }
+
+        if (result[i].description.toLowerCase().indexOf(this.searchToken) >= 0)
+        {
+          result[i].sortRating += 1;
+        }
+
+      }
+
+
+
+      result = result.sort((a, b) => {
+        if (Number(a.sortRating) < Number(b.sortRating)) return 1;
+        else if (Number(a.sortRating)> Number(b.sortRating)) return -1;
+        else return 0;
+      });
+
       this.setProducts(result);
 
       this.loading = false;
@@ -664,14 +693,17 @@ export class HomeComponent {
 
     productDetail.products.push(product);
     
+
+    
+
     var p2 = <Product>JSON.parse(JSON.stringify(product));
     p2.supplier = "Try Care";
-    p2.price = Number(product.price) + this.getRandomInt(1,Math.min(5,Math.floor(Number(product.price) * 0.05)));
+    p2.price = this.getRandomInt(Number(product.price) , Number(product.maxPrice));  //Number(product.price) + this.getRandomInt(1,Math.min(5,Math.floor(Number(product.price) * 0.05)));
 
     
     var p3 = <Product>JSON.parse(JSON.stringify(product));
     p3.supplier = "Swallow Dental";
-    p3.price = Number(product.price) + this.getRandomInt(1,Math.min(5,Math.floor(Number(product.price * 0.07))));
+    p3.price = product.maxPrice;  //Number(product.price) + this.getRandomInt(1,Math.min(5,Math.floor(Number(product.price * 0.07))));
 
     productDetail.products.push(p2);
     productDetail.products.push(p3);

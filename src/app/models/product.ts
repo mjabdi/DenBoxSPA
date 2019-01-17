@@ -17,6 +17,7 @@ export class Product
     minPrice : number;
     maxPrice : number;
 
+    sortRating : number = 0;
 
     searchString : string;
 }
